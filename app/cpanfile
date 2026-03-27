@@ -1,0 +1,12 @@
+requires 'perl', '5.010';           # минимальная версия Perl
+requires 'Getopt::Long';            # для парсинга аргументов командной строки
+requires 'Text::CSV';               # если вы работаете с CSV
+requires 'JSON::PP';                # если выводите в JSON (Pure Perl версия)
+requires 'List::Util';              # полезные утилиты для работы со списками
+
+# Опциональные модули (для разработки)
+on 'develop' => sub {
+    requires 'Perl::Critic';        
+    requires 'Test::More';          
+};
+
