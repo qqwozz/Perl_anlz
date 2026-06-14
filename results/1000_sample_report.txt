@@ -1,50 +1,95 @@
-Анализирую файл: access.log
-Всего строк в файле: 1000
+============================================================
+LOG ANALYSIS REPORT
+============================================================
+
+GENERAL STATISTICS
+----------------------------------------
+Total requests:    1000
+Unique IPs:        5
+Total data:        4.78 MB
+
+TOP 10 IPs BY REQUEST COUNT
+----------------------------------------
+172.16.0.1      : 210 requests (21.0%)
+8.8.8.8         : 209 requests (20.9%)
+192.168.1.1     : 207 requests (20.7%)
+10.0.0.1        : 202 requests (20.2%)
+1.1.1.1         : 172 requests (17.2%)
+
+HTTP METHOD DISTRIBUTION
+----------------------------------------
+DELETE     : 219 requests (21.9%)
+GET        : 251 requests (25.1%)
+POST       : 264 requests (26.4%)
+PUT        : 266 requests (26.6%)
+
+TOP 10 URLs BY REQUEST COUNT
+----------------------------------------
+/index.html                    : 158 requests (15.8%)
+/products                      : 157 requests (15.7%)
+/admin                         : 152 requests (15.2%)
+/about                         : 138 requests (13.8%)
+/cart                          : 135 requests (13.5%)
+/api/users                     : 133 requests (13.3%)
+/images/logo.png               : 127 requests (12.7%)
+
+RESPONSE CODE DISTRIBUTION
+----------------------------------------
+200 : 566 requests (56.6%)
+301 : 147 requests (14.7%)
+404 : 132 requests (13.2%)
+500 : 155 requests (15.5%)
+
+ERROR ANALYSIS
+----------------------------------------
+Total errors (4xx, 5xx): 287
+Error rate: 28.70%
+
+TOP 10 URLs WITH ERRORS
+/products                      : 48 errors (30.6%)
+/api/users                     : 47 errors (35.3%)
+/index.html                    : 45 errors (28.5%)
+/admin                         : 42 errors (27.6%)
+/images/logo.png               : 39 errors (30.7%)
+/cart                          : 39 errors (28.9%)
+/about                         : 27 errors (19.6%)
+
+TOP 10 IPs WITH ERRORS
+172.16.0.1      : 66 errors (31.4%)
+192.168.1.1     : 65 errors (31.4%)
+10.0.0.1        : 64 errors (31.7%)
+8.8.8.8         : 53 errors (25.4%)
+1.1.1.1         : 39 errors (22.7%)
+
+SECURITY ANALYSIS
+----------------------------------------
+TOP 10 SUSPICIOUS IPs
+172.16.0.1      : 42 suspicious requests (20.0%)
+8.8.8.8         : 39 suspicious requests (18.7%)
+10.0.0.1        : 36 suspicious requests (17.8%)
+192.168.1.1     : 35 suspicious requests (16.9%)
+1.1.1.1         : 27 suspicious requests (15.7%)
+
+TOP 10 SUSPICIOUS URLs
+/products                                          : 33 attempts
+/admin                                             : 29 attempts
+/cart                                              : 26 attempts
+/index.html                                        : 26 attempts
+/about                                             : 23 attempts
+/images/logo.png                                   : 22 attempts
+/api/users                                         : 20 attempts
+
+USER AGENT STATISTICS
+----------------------------------------
+Unique user agents: 5
+
+TOP 5 USER AGENTS
+Mozilla/5.0 (iPhone; CPU iPhone OS 17_0  : 219 requests
+Mozilla/5.0 (Windows NT 10.0; Win64; x64 : 204 requests
+Mozilla/5.0 (Macintosh; Intel Mac OS X 1 : 202 requests
+Mozilla/5.0 (X11; Linux x86_64) Firefox/ : 196 requests
+curl/7.68.0                              : 179 requests
 
 ============================================================
-ОТЧЕТ ПО АНАЛИЗУ ЛОГА: access.log
-============================================================
-Всего запросов: 1000
-Всего передано данных: 4.78 MB
-
---- ТОП 10 IP ПО КОЛИЧЕСТВУ ЗАПРОСОВ ---
-1.1.1.1         : 214 запросов
-10.0.0.1        : 211 запросов
-8.8.8.8         : 210 запросов
-172.16.0.1      : 189 запросов
-192.168.1.1     : 176 запросов
-
---- СТАТИСТИКА HTTP-МЕТОДОВ ---
-DELETE     : 231 запросов
-GET        : 266 запросов
-POST       : 249 запросов
-PUT        : 254 запросов
-
---- ТОП 10 ПОПУЛЯРНЫХ URL ---
-/cart                          : 160 запросов
-/index.html                    : 156 запросов
-/images/logo.png               : 151 запросов
-/admin                         : 143 запросов
-/about                         : 135 запросов
-/products                      : 130 запросов
-/api/users                     : 125 запросов
-
---- СТАТИСТИКА КОДОВ ОТВЕТА ---
-200 : 552 запросов (55.2%)
-301 : 145 запросов (14.5%)
-404 : 159 запросов (15.9%)
-500 : 144 запросов (14.4%)
-
---- УНИКАЛЬНЫЕ USER-AGENTS ---
-Всего уникальных браузеров/клиентов: 5
-
-Топ 5 User-Agents:
-Mozilla/5.0 (iPhone; CPU iPhone OS 17_0  : 222 запросов
-curl/7.68.0                              : 205 запросов
-Mozilla/5.0 (Macintosh; Intel Mac OS X 1 : 197 запросов
-Mozilla/5.0 (Windows NT 10.0; Win64; x64 : 191 запросов
-Mozilla/5.0 (X11; Linux x86_64) Firefox/ : 185 запросов
-
-============================================================
-Анализ завершен.
+Analysis complete.
 ============================================================

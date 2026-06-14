@@ -1,0 +1,116 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use 5.010;
+use Getopt::Long;
+use Pod::Usage;
+
+use lib qw(lib);
+use Perl::Log::Analyzer;
+
+my $top_n = 10;
+my $suspicious_threshold = 100;
+my $error_threshold = 50;
+my $help = 0;
+my $man = 0;
+
+GetOptions(
+    'top=i'                 => \$top_n,
+    'suspicious-threshold=i' => \$suspicious_threshold,
+    'error-threshold=i'     => \$error_threshold,
+    'help|h'                => \$help,
+    'man|m'                 => \$man,
+) or pod2usage(2);
+
+pod2usage(1) if $help;
+pod2usage(-exitval => 0, -verbose => 2) if $man;
+
+my $file = shift @ARGV;
+unless ($file) {
+    warn "Error: No log file specified.\n";
+    pod2usage(1);
+}
+
+my $analyzer = Perl::Log::Analyzer->new(
+    file                => $file,
+    top_n               => $top_n,
+    suspicious_threshold => $suspicious_threshold,
+    error_threshold     => $error_threshold,
+);
+
+my $stats = $analyzer->analyze();
+my $report = $analyzer->report($stats);
+
+print $report;
+
+__END__
+
+=head1 NAME
+
+log_analyzer - Analyze Apache/nginx access logs
+
+=head1 SYNOPSIS
+
+    log_analyzer [options] <log_file>
+
+    Options:
+        --top=N                   Number of top items to display (default: 10)
+        --suspicious-threshold=N  Threshold for suspicious IP detection (default: 100)
+        --error-threshold=N       Threshold for high error rate detection (default: 50)
+        --help                    Show this help message
+        --man                     Show full documentation
+
+=head1 DESCRIPTION
+
+Analyzes Apache/nginx access log files and generates comprehensive reports
+including statistics on IPs, HTTP methods, response codes, errors, and
+security threats.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--top=N>
+
+Number of top items to display in reports. Default is 10.
+
+=item B<--suspicious-threshold=N>
+
+Threshold for flagging suspicious IP activity. Default is 100.
+
+=item B<--error-threshold=N>
+
+Threshold for high error rate detection. Default is 50.
+
+=item B<--help>
+
+Prints a brief help message and exits.
+
+=item B<--man>
+
+Prints the manual page and exits.
+
+=back
+
+=head1 EXAMPLES
+
+    # Basic analysis
+    log_analyzer access.log
+
+    # Show top 20 items
+    log_analyzer --top=20 access.log
+
+    # Save report to file
+    log_analyzer access.log > report.txt
+
+=head1 AUTHOR
+
+Perl Log Analyzer Team
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut

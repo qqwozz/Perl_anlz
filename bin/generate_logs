@@ -1,0 +1,180 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use 5.010;
+use Getopt::Long;
+use Pod::Usage;
+
+my $output_file = 'access.log';
+my $num_entries = 1000;
+my $help = 0;
+my $man = 0;
+
+GetOptions(
+    'output|o=s' => \$output_file,
+    'count|c=i'  => \$num_entries,
+    'help|h'     => \$help,
+    'man|m'      => \$man,
+) or pod2usage(2);
+
+pod2usage(1) if $help;
+pod2usage(-exitval => 0, -verbose => 2) if $man;
+
+my @ips = qw(
+    192.168.1.1 192.168.1.2 192.168.1.3
+    10.0.0.1 10.0.0.2 10.0.0.3
+    172.16.0.1 172.16.0.2
+    8.8.8.8 1.1.1.1 208.67.222.222
+);
+
+my @methods = qw(GET GET GET GET GET POST POST PUT DELETE);
+
+my @urls = (
+    '/index.html',
+    '/about',
+    '/contact',
+    '/api/users',
+    '/api/products',
+    '/api/orders',
+    '/images/logo.png',
+    '/images/banner.jpg',
+    '/css/style.css',
+    '/js/app.js',
+    '/admin',
+    '/admin/dashboard',
+    '/products',
+    '/products/1',
+    '/products/2',
+    '/cart',
+    '/checkout',
+    '/login',
+    '/register',
+    '/api/auth/login',
+    '/api/auth/logout',
+    '/api/search',
+    '/robots.txt',
+    '/sitemap.xml',
+    '/favicon.ico',
+);
+
+my @statuses = (200, 200, 200, 200, 200, 200, 200, 200, 301, 302, 404, 500);
+
+my @user_agents = (
+    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+    'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1',
+    'Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36',
+    'Mozilla/5.0 (X11; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0',
+    'curl/7.88.1',
+    'Wget/1.21.3',
+    'python-requests/2.31.0',
+    'Googlebot/2.1 (+http://www.google.com/bot.html)',
+    'Bingbot/2.0 (+http://www.bing.com/bingbot.htm)',
+);
+
+my %month_map = (
+    'Jan' => 0, 'Feb' => 1, 'Mar' => 2, 'Apr' => 3,
+    'May' => 4, 'Jun' => 5, 'Jul' => 6, 'Aug' => 7,
+    'Sep' => 8, 'Oct' => 9, 'Nov' => 10, 'Dec' => 11,
+);
+
+my @months = sort keys %month_map;
+
+open(my $fh, '>', $output_file) or die "Cannot open '$output_file': $!\n";
+
+for my $i (1 .. $num_entries) {
+    my $ip = $ips[rand @ips];
+    my $method = $methods[rand @methods];
+    my $url = $urls[rand @urls];
+    my $status = $statuses[rand @statuses];
+    my $ua = $user_agents[rand @user_agents];
+    
+    my $days_ago = int(rand(30));
+    my $time = time() - ($days_ago * 86400) + int(rand(86400));
+    my @t = localtime($time);
+    
+    my $month = $months[$t[4]];
+    my $day = sprintf("%02d", $t[3]);
+    my $year = $t[5] + 1900;
+    my $hour = sprintf("%02d", $t[2]);
+    my $min = sprintf("%02d", $t[1]);
+    my $sec = sprintf("%02d", $t[0]);
+    
+    my $date = "[$day/$month/$year:$hour:$min:$sec +0000]";
+    
+    my $bytes = int(rand(50000)) + 100;
+    
+    my $log_line = qq($ip - - $date "$method $url HTTP/1.1" $status $bytes "-" "$ua"\n);
+    print $fh $log_line;
+}
+
+close($fh);
+
+print "Generated $num_entries log entries to $output_file\n";
+
+__END__
+
+=head1 NAME
+
+generate_logs - Generate test access log files
+
+=head1 SYNOPSIS
+
+    generate_logs [options]
+
+    Options:
+        --output|-o=FILE   Output file (default: access.log)
+        --count|-c=N       Number of entries to generate (default: 1000)
+        --help|-h          Show this help message
+        --man|-m           Show full documentation
+
+=head1 DESCRIPTION
+
+Generates realistic Apache/nginx access log files for testing purposes.
+The generated logs include various IP addresses, HTTP methods, URLs,
+response codes, and user agents.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--output|-o=FILE>
+
+Output file path. Default is 'access.log'.
+
+=item B<--count|-c=N>
+
+Number of log entries to generate. Default is 1000.
+
+=item B<--help|-h>
+
+Prints a brief help message and exits.
+
+=item B<--man|-m>
+
+Prints the manual page and exits.
+
+=back
+
+=head1 EXAMPLES
+
+    # Generate 1000 entries (default)
+    generate_logs
+
+    # Generate 10000 entries
+    generate_logs --count=10000
+
+    # Generate to specific file
+    generate_logs --output=test.log --count=5000
+
+=head1 AUTHOR
+
+Perl Log Analyzer Team
+
+=head1 LICENSE
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=cut

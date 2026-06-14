@@ -1,0 +1,33 @@
+# Perl
+*.bak
+*.swp
+*.swo
+*~
+blib/
+Build
+MYMETA.json
+MYMETA.yml
+META.json
+META.yml
+Makefile
+pm_to_blib
+
+# Generated files
+access.log
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+t/*.t.err
+.coverage
+html/
+codecov.json

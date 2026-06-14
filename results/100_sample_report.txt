@@ -1,0 +1,94 @@
+============================================================
+LOG ANALYSIS REPORT
+============================================================
+
+GENERAL STATISTICS
+----------------------------------------
+Total requests:    100
+Unique IPs:        5
+Total data:        521.91 KB
+
+TOP 10 IPs BY REQUEST COUNT
+----------------------------------------
+172.16.0.1      : 24 requests (24.0%)
+1.1.1.1         : 22 requests (22.0%)
+10.0.0.1        : 19 requests (19.0%)
+192.168.1.1     : 18 requests (18.0%)
+8.8.8.8         : 17 requests (17.0%)
+
+HTTP METHOD DISTRIBUTION
+----------------------------------------
+DELETE     : 24 requests (24.0%)
+GET        : 33 requests (33.0%)
+POST       : 19 requests (19.0%)
+PUT        : 24 requests (24.0%)
+
+TOP 10 URLs BY REQUEST COUNT
+----------------------------------------
+/cart                          : 18 requests (18.0%)
+/api/users                     : 17 requests (17.0%)
+/about                         : 15 requests (15.0%)
+/products                      : 15 requests (15.0%)
+/admin                         : 13 requests (13.0%)
+/index.html                    : 12 requests (12.0%)
+/images/logo.png               : 10 requests (10.0%)
+
+RESPONSE CODE DISTRIBUTION
+----------------------------------------
+200 : 50 requests (50.0%)
+301 : 17 requests (17.0%)
+404 : 15 requests (15.0%)
+500 : 18 requests (18.0%)
+
+ERROR ANALYSIS
+----------------------------------------
+Total errors (4xx, 5xx): 33
+Error rate: 33.00%
+
+TOP 10 URLs WITH ERRORS
+/api/users                     : 8 errors (47.1%)
+/products                      : 7 errors (46.7%)
+/about                         : 7 errors (46.7%)
+/admin                         : 5 errors (38.5%)
+/cart                          : 3 errors (16.7%)
+/index.html                    : 2 errors (16.7%)
+/images/logo.png               : 1 errors (10.0%)
+
+TOP 10 IPs WITH ERRORS
+172.16.0.1      : 9 errors (37.5%)
+1.1.1.1         : 8 errors (36.4%)
+8.8.8.8         : 7 errors (41.2%)
+192.168.1.1     : 5 errors (27.8%)
+10.0.0.1        : 4 errors (21.1%)
+
+SECURITY ANALYSIS
+----------------------------------------
+TOP 10 SUSPICIOUS IPs
+172.16.0.1      : 6 suspicious requests (25.0%)
+10.0.0.1        : 6 suspicious requests (31.6%)
+8.8.8.8         : 5 suspicious requests (29.4%)
+1.1.1.1         : 4 suspicious requests (18.2%)
+192.168.1.1     : 3 suspicious requests (16.7%)
+
+TOP 10 SUSPICIOUS URLs
+/api/users                                         : 6 attempts
+/cart                                              : 5 attempts
+/about                                             : 5 attempts
+/admin                                             : 4 attempts
+/index.html                                        : 3 attempts
+/images/logo.png                                   : 1 attempts
+
+USER AGENT STATISTICS
+----------------------------------------
+Unique user agents: 5
+
+TOP 5 USER AGENTS
+curl/7.68.0                              : 24 requests
+Mozilla/5.0 (X11; Linux x86_64) Firefox/ : 24 requests
+Mozilla/5.0 (Macintosh; Intel Mac OS X 1 : 23 requests
+Mozilla/5.0 (Windows NT 10.0; Win64; x64 : 15 requests
+Mozilla/5.0 (iPhone; CPU iPhone OS 17_0  : 14 requests
+
+============================================================
+Analysis complete.
+============================================================
